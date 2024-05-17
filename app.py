@@ -4,9 +4,20 @@ import numpy as np
 from tensorflow.keras.models import load_model
 import tensorflow as tf
 from PIL import Image
+import cloudinary
+from cloudinary.uploader import upload
+import tempfile
+import os
 
 # Initialize Flask app
 app = Flask(__name__)
+
+# Configure Cloudinary
+cloudinary.config(
+    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.getenv('CLOUDINARY_API_KEY'),
+    api_secret=os.getenv('CLOUDINARY_API_SECRET')
+)
 
 # Load the trained model
 model = load_model('Modeltrained.h5')
@@ -49,11 +60,28 @@ def predict():
         if image.shape[2] == 4:
             image = cv2.cvtColor(image, cv2.COLOR_RGBA2RGB)
 
-        # Predict the hand sign
-        result = predict_sign(image)
+        # Save the image to a temporary file
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.jpg') as temp_file:
+            image_pil = Image.fromarray(image)
+            image_pil.save(temp_file, format='JPEG')
+            temp_file_path = temp_file.name
 
-        return render_template('result.html', prediction=result)
+        try:
+            # Upload image to Cloudinary
+            upload_result = upload(temp_file_path)
+
+            # Get the URL of the uploaded image
+            image_url = upload_result.get("url")
+
+            # Predict the hand sign
+            result = predict_sign(image)
+
+        finally:
+            # Clean up the temporary file
+            os.remove(temp_file_path)
+
+        return render_template('result.html', prediction=result, image_url=image_url)
 
 # Run the app
-#if __name__ == '__main__':
-#    app.run(debug=False,host='0.0.0.0')
+if __name__ == '__main__':
+    app.run(debug=False, host='0.0.0.0')

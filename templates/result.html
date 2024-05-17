@@ -45,7 +45,8 @@
 <body>
     <div class="container">
         <h1>Prediction Result</h1>
-        <p>The uploaded image is recognized as: <strong>{{ prediction }}</strong></p>
+        <p>Prediction: {{ prediction }}</p>
+		<img src="{{ image_url }}" alt="Uploaded Image">
         <a href="/">Upload another image</a>
     </div>
 </body>
