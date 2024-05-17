@@ -55,5 +55,5 @@ def predict():
         return render_template('result.html', prediction=result)
 
 # Run the app
-if __name__ == '__main__':
-    app.run(debug=False,host='0.0.0.0')
+#if __name__ == '__main__':
+#    app.run(debug=False,host='0.0.0.0')
