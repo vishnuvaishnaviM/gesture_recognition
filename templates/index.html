@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors Recognition</title>
+    <style>
+        body {
+            background-color: #000000; 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0;
+        }
+
+        .container {
+            width: 50%; 
+            margin: 100px auto; 
+            background-color: #fff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+
+        h1 {
+            text-align: center; 
+        }
+
+        form {
+            text-align: center; 
+        }
+
+        input[type="file"] {
+            display: block; 
+            margin: 0 auto 20px; 
+        }
+
+        input[type="submit"] {
+            display: block; 
+            margin: 0 auto; 
+            background-color: #2ecc71; 
+            color: #fff; 
+            padding: 10px 20px; 
+            border: none;
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+
+        input[type="submit"]:hover {
+            background-color: #27ae60; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container"> 
+        <h1>Upload an Image to Recognize Rock, Paper, Scissors, or Other</h1>
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="Upload">
+        </form>
+    </div>
+</body>
+</html>
