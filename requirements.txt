@@ -6,6 +6,7 @@ certifi==2024.2.2
 cffi==1.16.0
 charset-normalizer==3.3.2
 click==8.1.7
+cloudinary==1.40.0
 colorama==0.4.6
 contourpy==1.2.1
 cycler==0.12.1
@@ -54,6 +55,7 @@ sounddevice==0.4.6
 tensorboard==2.16.2
 tensorboard-data-server==0.7.2
 tensorflow==2.16.1
+tensorflow-intel==2.16.1
 termcolor==2.4.0
 typing_extensions==4.11.0
 urllib3==2.2.1
